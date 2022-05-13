@@ -1,0 +1,9 @@
+.form_creator {
+    min-height: 100px;
+}
+.form_creator_toggler {
+    min-height: 200px;
+    padding: 20px;
+    background: rgb(244, 244, 244);
+    margin-top: 10px;
+}
