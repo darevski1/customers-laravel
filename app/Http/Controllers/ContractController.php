@@ -57,7 +57,8 @@ class ContractController extends Controller
      */
     public function show($id)
     {
-        //
+       $contract = Contract::find($id);
+       return view("pages.customers.index", compact('contract'));
     }
 
     /**
@@ -68,8 +69,7 @@ class ContractController extends Controller
      */
     public function edit($id)
     {
-        $contract = Contract::find($id);
-        return view("pages.contract.edit", compact('contract'));
+       
     }
 
     /**

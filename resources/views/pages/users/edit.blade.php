@@ -9,7 +9,10 @@
                 <div class="card-body">
                     <div class="form_creator">
                   
-                                <form action="">
+                                <form action="{{route('users.update', [$user->id]) }}" method="POST">
+                                    {{method_field('PATCH')}}
+                                    {{ csrf_field() }}       
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" name="name" placeholder="Име" aria-label="contract" aria-describedby="basic-addon1" value="{{$user->name}}">
                                     </div>
@@ -20,7 +23,10 @@
                                         <input type="text" class="form-control" name="email" placeholder="Емаил" aria-label="contract" aria-describedby="basic-addon1" value="{{$user->email}}">
                                     </div>
                                     <div class="input-group mb-3">
-                                        <select class="form-select" aria-label="Default select example">
+                                        <input type="password" class="form-control" name="password">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" aria-label="Default select example" name="status">
                                             <option selected disabled>Промени статус</option>
                                                 @if($user->status == 1)
                                                     <option value="0">Деактивирај</option>
@@ -30,34 +36,14 @@
                                           </select>
                                     </div>
                                     <div class="input-group">
-                                        <button type="button" class="btn btn-success pull-right">Зачувај</button>
+                                        <button type="submit" class="btn btn-success pull-right">Зачувај</button>
                                     </div>
                                 </form>
                            
                     </div>
 
 
-                   <div class="form_password">
-                        <div x-data="{ open: true }">
-                            <button @click="open = ! open" class="btn btn-outline-primary mb-4 ">Промени Лозинка</button>
-                        
-                            <div x-show="open" @click.outside="open = true" class="fo">
-                                <h5>Промена на Лозинка</h5>
-                                <form action="">
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" name="password" >
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" name="retype_password">
-                                    </div>
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-success pull-right">Зачувај</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                   </div>
+              
                 </div>
             </div>
         </div>

@@ -82,10 +82,12 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->password = Hash::make($request->password);
         $user->status = $request->status;
 
         $user->save();
 
+        return redirect('users');
     }
 
     /**
