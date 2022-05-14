@@ -12,6 +12,6 @@ class Contract extends Model
 
     public function customer()
         {
-            return $this->belongsTo(Customer::class, "contract_type");
+            return $this->belongsTo(Customer::class, "contract_id", "id");
         }
 }

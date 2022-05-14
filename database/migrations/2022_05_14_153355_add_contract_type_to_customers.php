@@ -14,10 +14,10 @@ class AddContractTypeToCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('contract_type')->nullable()->unsigned();    
-            $table->foreign('contract_type')
+            $table->unsignedBigInteger('contract_id')->nullable()->unsigned();    
+            $table->foreign('contract_id')
             ->references('id')->on('contracts')
-            ->onDelete('cascade');
+            ->onDelete('cascade')->after("contract_name");
         });
     }
 

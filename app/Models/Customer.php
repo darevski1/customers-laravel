@@ -13,7 +13,7 @@ class Customer extends Model
 
     
     public function contract(){
-        return $this->hasOne(Contract::class, "contract_type");
+        return $this->hasOne(Contract::class, "id");
     }
 
 

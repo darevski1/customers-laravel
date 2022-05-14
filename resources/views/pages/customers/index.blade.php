@@ -30,7 +30,7 @@
                                         <input type="text" class="form-control" name="contract_number" placeholder="Внеси број на договор" aria-label="contract" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
-                                     <select class="form-select" aria-label="Default select example" name="contract_type">
+                                     <select class="form-select" aria-label="Default select example" name="contract_id">
                                             <option selected disabled>Избери тип на договор</option>
                                                @foreach ($contracts as $contract)
                                                  <option value="{{ $contract->id}}">{{ $contract->contract_name}}</option>
@@ -68,9 +68,10 @@
                                     <td>{{$customer->street}}</td>
                                     <td>{{$customer->phone}}</td>
                                     <td>{{$customer->contract_number}}</td>
-                                    <td>{{$customer->contract_type}}</td>
-               
-
+                                    <td>{{$customer->contract->contract_name}}</td>
+                                    
+                         
+                                   
 
                                 </tr>
                                 

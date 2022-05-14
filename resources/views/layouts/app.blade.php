@@ -40,10 +40,10 @@
                               <a class="nav-link active" aria-current="page" href="{{url("/")}}">Почетна</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url("customer")}}">Договори</a>
+                                <a class="nav-link" href="{{url("customer")}}">Склучени Договори</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="{{url("contract")}}">Тип на договори</a>
+                              <a class="nav-link" href="{{url("contract")}}">Тип на ПКЖ</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="{{url("users")}}">Корисници</a>

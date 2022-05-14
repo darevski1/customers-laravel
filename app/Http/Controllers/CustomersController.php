@@ -45,7 +45,7 @@ class CustomersController extends Controller
         $customer->street = $request->street;
         $customer->phone = $request->phone;
         $customer->contract_number = $request->contract_number;
-        $customer->contract_type = $request->contract_type;
+        $customer->contract_id = $request->contract_id;
         $customer->save();
     }
 
