@@ -34,13 +34,27 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="{{url("/")}}">Почетна</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url("customer")}}">Договори</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{{url("contract")}}">Тип на договори</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{{url("users")}}">Корисници</a>
+                            </li>
+                          </ul>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                 
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContractsTable extends Migration
+class AddStatusToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
-            $table->id();
-            $table->string("contract_name");
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer("status")->default(1);
         });
     }
 
@@ -27,6 +25,8 @@ class CreateContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\UsersController;
 
 
 /*
@@ -40,7 +41,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::get('/contract', [ContractController::class, 'index']);
-Route::get('/contract/{id}/edit', [ContractController::class, 'edit']);
-
-Route::get('/customer', [CustomersController::class, 'index']);
+Route::resource('/contract', ContractController::class);
+Route::resource('/customer', CustomersController::class);
+Route::resource('/users', UsersController::class);

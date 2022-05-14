@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contract;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Redirect;
-use Session;
-class ContractController extends Controller
+use Illuminate\Support\Facades\Hash;
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $contracts = Contract::all();
-        return view("pages.contract.contract", compact('contracts'));
+        $users = User::all();
+        return view("pages.users.index", compact('users'));
     }
 
     /**
@@ -37,16 +37,12 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'contract_name' => 'required',
-        ]);
-
-        $contract = new Contract();
-        $contract->contract_name = $request->contract_name;
-        $contract->save();
-
-        return redirect()->back();
-
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
     }
 
     /**
@@ -57,7 +53,8 @@ class ContractController extends Controller
      */
     public function show($id)
     {
-        //
+ 
+
     }
 
     /**
@@ -68,8 +65,8 @@ class ContractController extends Controller
      */
     public function edit($id)
     {
-        $contract = Contract::find($id);
-        return view("pages.contract.edit", compact('contract'));
+        $user = User::find($id);
+        return view("pages.users.edit")->with('user', $user);
     }
 
     /**
@@ -81,18 +78,14 @@ class ContractController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'contract_name' => 'required|max:255',
-        ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->status = $request->status;
 
-        $contract = Contract::find($id);
-        $contract->contract_name = $request->input('contract_name');
-        $contract->save();
+        $user->save();
 
-        return redirect()->back();
-
-
-      
     }
 
     /**
@@ -103,9 +96,6 @@ class ContractController extends Controller
      */
     public function destroy($id)
     {
-        $contract = Contract::find($id);
-        $contract->delete();
-        return redirect()->back();
-      
+        //
     }
 }

@@ -3,48 +3,47 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-sm-12 mb-4">
+            <a href="{{ URL::previous() }}" class="btn btn-outline-primary" >Назад</a>
+        </div>
+
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Промена на податоци') . " - " . $contract->contract_name }}</div>
                 <div class="card-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form_creator">
-                        <div x-data="{ open: false }">
-                            <button @click="open = ! open" class="btn btn-primary">Креирај нов</button>
                         
-                            <div x-show="open" @click.outside="open = true" class="form_creator_toggler">
-                                <form action="">
+                                <form action=" {{ route('contract.update', [$contract->id]) }}" method="POST">
+
+                                    {{method_field('PATCH')}}
+                                    {{ csrf_field() }}       
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                         
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="contract" placeholder="Внеси тип на договор" aria-label="contract" aria-describedby="basic-addon1">
+                                        <input id="contract_name" type="text" class="form-control" name="contract_name" aria-label="contract_name" aria-describedby="basic-addon1" value="{{$contract->contract_name}}">
                                     </div>
+                                     
+                                        @error('contract_name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
                                     <div class="input-group">
-                                        <button type="button" class="btn btn-success pull-right">Зачувај</button>
+                                        <button type="submit" class="btn btn-success pull-right">Зачувај</button>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
                     </div>
 
-                <div class="contract_container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Тип на договор</th>
-                            <th scope="col">Промени</th>
-                            <th scope="col">Бриши</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td><button type="button" class="btn btn-warning">Промени</button></td>
-                                <td><button type="button" class="btn btn-danger">Бриши</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+       
 
 
                 </div>
