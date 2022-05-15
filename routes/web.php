@@ -29,18 +29,13 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
-Route::resource('/contract', ContractController::class);
-Route::resource('/customer', CustomersController::class);
-Route::resource('/users', UsersController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/contract', ContractController::class);
+    Route::resource('/customer', CustomersController::class);
+    Route::resource('/users', UsersController::class);
+    
+});

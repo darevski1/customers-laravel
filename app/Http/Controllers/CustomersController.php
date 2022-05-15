@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\Customer;
-
+use Auth;
 class CustomersController extends Controller
 {
     /**
@@ -15,6 +15,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
+        
         $contracts= Contract::all();
         $customers = Customer::all();
         return view("pages.customers.index", compact('contracts'), compact('customers'));
@@ -42,11 +43,16 @@ class CustomersController extends Controller
         $customer = new Customer();
         $customer->name = $request->name;
         $customer->last_name = $request->last_name;
+        $customer->plate = $request->plate;
         $customer->street = $request->street;
         $customer->phone = $request->phone;
         $customer->contract_number = $request->contract_number;
+        $customer->create_date = $request->create_date;
         $customer->contract_id = $request->contract_id;
+        $customer->user_id = Auth::user()->id;
         $customer->save();
+
+        return redirect()->back();
     }
 
     /**

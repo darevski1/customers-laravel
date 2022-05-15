@@ -16,10 +16,23 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <script>
+        $( function() {
+          $( "#datepicker" ).datepicker({
+dateFormat: "dd-mm-yy",
+altField: "#datepick_1",
+altFormat: "DD, d MM, yy",
+});
+        } );
+        </script>
 </head>
 <body>
     <div id="app">
@@ -35,20 +48,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @if (Auth::check())
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="{{url("/")}}">Почетна</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{url("customer")}}">Склучени Договори</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="{{url("contract")}}">Тип на ПКЖ</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="{{url("users")}}">Корисници</a>
-                            </li>
-                          </ul>
+                             
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{{url("/dashboard")}}">Почетна</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url("customer")}}">Сите Договори</a>
+                                </li>
+                                @can('isAdmin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url("contract")}}">Тип на ПКЖ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url("users")}}">Корисници</a>
+                                </li>
+                                @endcan
+                            </ul>
+                        
+                        @else
+                             
+                        @endif
+                      
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -70,14 +92,14 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->name }} {{ Auth::user()->last_name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Одјава') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -95,5 +117,6 @@
             @yield('content')
         </main>
     </div>
+ 
 </body>
 </html>

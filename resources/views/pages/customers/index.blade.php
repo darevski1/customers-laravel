@@ -21,6 +21,9 @@
                                         <input type="text" class="form-control" name="last_name" placeholder="Внеси презиме на корисник" aria-label="contract" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="plate" placeholder="Регистарска Таблица" aria-label="contract" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
                                         <input type="text" class="form-control" name="street" placeholder="Внеси Улица" aria-label="contract" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
@@ -38,42 +41,51 @@
                                                @endforeach
                                           </select>
                                     </div>
-                                    <div class="input-group">
-                                        <button type="submit" class="btn btn-success pull-right">Зачувај</button>
+                                    <div class="input-group mb-3">
+                                        <p>Date: <input type="text" class="form-control" name="create_date"  id="datepicker"></p>
+
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-success pull-right" >Зачувај</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="contract_number" placeholder="Внеси број на договор" aria-label="contract" aria-describedby="basic-addon1">
+                    </div>
                 <div class="contract_container">
-                    <table class="table">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Име Презиме</th>
                             <th scope="col">Улица</th>
+                            <th scope="col">Рег. Таблица</th>
                             <th scope="col">Телефон</th>
                             <th scope="col">Број на договор</th>
+                            <th scope="col">Креиран на </th>
                             <th scope="col">Тип на договор</th>
+                            <th scope="col">Дата на внесување</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($customers as $customer)
-                             
-                             
+                             @can('view-post', $customer)
                                 <tr>
                                     <th scope="row">{{$customer->id}}</th>
                                     <td>{{$customer->name}} {{$customer->last_name}}</td>
                                     <td>{{$customer->street}}</td>
+                                    <td>{{$customer->plate}}</td>
                                     <td>{{$customer->phone}}</td>
                                     <td>{{$customer->contract_number}}</td>
+                                    <td>{{$customer->create_date}}</td>
                                     <td>{{$customer->contract->contract_name}}</td>
-                                    
-                         
-                                   
-
+                                    <td>{{$customer->created_at->format('d-m-Y')}}</td>
                                 </tr>
+                            @endcan
+
                                 
                             @endforeach
                             

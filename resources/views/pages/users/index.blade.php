@@ -43,6 +43,7 @@
                                 <th scope="col">Корисник</th>
                                 <th scope="col">Емаил</th>
                                 <th scope="col">Статус</th>
+                                <th scope="col">Тип на Корисник</th>
                                 <th scope="col">Промени</th>
                                 <th scope="col">Бриши</th>
                             </tr>
@@ -61,6 +62,8 @@
 
                                     @endif
                                 </td>
+                                <td>{{ $user->user_type}}</td>
+
                                 <td>
                                     <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-warning">Промениs</a>
 

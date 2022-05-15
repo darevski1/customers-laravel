@@ -35,6 +35,13 @@
                                                 @endif
                                           </select>
                                     </div>
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" aria-label="Default select example" name="status">
+                                            <option selected disabled>Промени тип на Корисник</option>
+                                            <option value="administrator">Администратор</option>
+                                            <option value="super-administrator">Супер Администратор</option>
+                                          </select>
+                                    </div>
                                     <div class="input-group">
                                         <button type="submit" class="btn btn-success pull-right">Зачувај</button>
                                     </div>

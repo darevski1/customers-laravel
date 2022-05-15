@@ -16,5 +16,9 @@ class Customer extends Model
         return $this->hasOne(Contract::class, "id");
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
